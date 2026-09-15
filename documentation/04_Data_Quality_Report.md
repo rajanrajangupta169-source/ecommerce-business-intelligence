@@ -771,266 +771,287 @@ The Products dataset has a valid primary key, no duplicate records, no invalid n
 
 ## 3.7 Sellers
 
-### Dataset Purpose
+# 07. -------------------------------------------------------------- SELLERS
 
-The Sellers dataset contains seller identification and
-geographic information.
+# Dataset Overview
+print("Rows:", len(sellers))
+print("Columns:", len(sellers.columns))
 
-### Grain
 
-One row represents one seller.
+# Preview
+display(sellers.head())
 
-### Columns
 
-- `seller_id`
-- `seller_zip_code_prefix`
-- `seller_city`
-- `seller_state`
+# Info
+sellers.info()
 
-### Missing Values
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
+#  Missing Values
+print("\n--- Missing Values ---")
+print(sellers.isna().sum())
 
-**Decision:**  
-[WRITE DECISION HERE]
 
-### Duplicate Records
+#  Missing Values Percentage
+print("\n--- Missing Values Percentage ---")
+print((sellers.isna().sum() / len(sellers) * 100).round(2))
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
 
-**Decision:**  
-[WRITE DECISION HERE]
+#  Duplicate Rows
+print("\n--- Duplicate Rows ---")
+print("Duplicate rows:", sellers.duplicated().sum())
 
-### Primary Key Validation
 
-**Primary Key:** `seller_id`
+#  Primary Key Check
+print("\n--- Primary Key Check ---")
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
+print("Missing seller_id:",
+      sellers["seller_id"].isna().sum())
 
-**Decision:**  
-[WRITE DECISION HERE]
+print("Duplicate seller_id:",
+      sellers["seller_id"].duplicated().sum())
 
-### Data Type Validation
+print("Unique seller_id:",
+      sellers["seller_id"].nunique())
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
+print("Total rows:",
+      len(sellers))
 
-**Decision:**  
-[WRITE DECISION HERE]
 
-### Geographic Validation
+#  Column Names
+print("\n--- Column Names ---")
+print(sellers.columns.tolist())
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
 
-**Decision:**  
-[WRITE DECISION HERE]
+#  Data Types
+print("\n--- Data Types ---")
+print(sellers.dtypes)
 
-### Final Treatment
 
-[WRITE FINAL TREATMENT HERE]
+#  Seller State Distribution
+print("\n--- Seller State Distribution ---")
+print(sellers["seller_state"].value_counts())
 
-### Conclusion
 
-[WRITE FINAL CONCLUSION HERE]
+#  Seller City Distribution
+print("\n--- Top 15 Seller Cities ---")
+print(sellers["seller_city"].value_counts().head(15))
+
+
+#  ZIP Code Validation
+print("\n--- ZIP Code Validation ---")
+
+print("Minimum zip code prefix:",
+      sellers["seller_zip_code_prefix"].min())
+
+print("Maximum zip code prefix:",
+      sellers["seller_zip_code_prefix"].max())
+
+print("Zero zip code:",
+      (sellers["seller_zip_code_prefix"] == 0).sum())
+
+print("Negative zip code:",
+      (sellers["seller_zip_code_prefix"] < 0).sum())
+
+
+#  Unique Values
+print("\n--- Unique Values ---")
+
+print("Unique seller cities:",
+      sellers["seller_city"].nunique())
+
+print("Unique seller states:",
+      sellers["seller_state"].nunique())
+
+print("Unique zip code prefixes:",
+      sellers["seller_zip_code_prefix"].nunique())
+
+
+#  Final Validation
+print("\n========== FINAL STATUS ==========")
+
+if (
+    sellers["seller_id"].isna().sum() == 0
+    and sellers["seller_id"].duplicated().sum() == 0
+    and sellers.duplicated().sum() == 0
+    and sellers["seller_zip_code_prefix"].isna().sum() == 0
+    and (sellers["seller_zip_code_prefix"] < 0).sum() == 0
+    and (sellers["seller_zip_code_prefix"] == 0).sum() == 0
+):
+    print("Seller ID / Duplicate / ZIP Code Check: PASS")
+else:
+    print("Seller Data Quality Check: REVIEW")
 
 
 ---
 
 ## 3.8 Geolocation
 
-### Dataset Purpose
+GEOLOCATION VALIDATION
 
-The Geolocation dataset contains geographic coordinates and
-location information associated with ZIP code prefixes.
+--- Dataset Overview ---
+Rows: 1,000,163
+Columns: 5
 
-### Grain
+--- Column Names ---
+['geolocation_zip_code_prefix',
+ 'geolocation_lat',
+ 'geolocation_lng',
+ 'geolocation_city',
+ 'geolocation_state']
 
-One row represents one geographic observation associated
-with a ZIP code prefix.
+--- Data Types ---
+geolocation_zip_code_prefix      int64
+geolocation_lat                float64
+geolocation_lng                float64
+geolocation_city                object
+geolocation_state               object
 
-### Columns
+--- Missing Values ---
+geolocation_zip_code_prefix    0
+geolocation_lat                 0
+geolocation_lng                 0
+geolocation_city                0
+geolocation_state               0
 
-- `geolocation_zip_code_prefix`
-- `geolocation_lat`
-- `geolocation_lng`
-- `geolocation_city`
-- `geolocation_state`
+--- Duplicate Rows ---
+Duplicate rows: 261,831
 
-### Missing Values
+Note:
+Duplicate geolocation records are present because multiple records
+can share the same ZIP code/location information. These duplicates
+are not treated as a primary-key failure.
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
+--- Geographic Validation ---
+Invalid Latitude: 0
+Invalid Longitude: 0
+Negative ZIP Code: 0
 
-**Decision:**  
-[WRITE DECISION HERE]
+Latitude valid range: -90 to 90
+Longitude valid range: -180 to 180
 
-### Duplicate Records
+--- ZIP Code Validation ---
+Total ZIP records: 1,000,163
+Unique ZIP Code Prefixes: 19,015
 
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
+--- Primary Key / Uniqueness ---
+Geolocation ZIP code prefix is NOT treated as a primary key because
+multiple geographic records can belong to the same ZIP code prefix.
 
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Primary Key Validation
-
-The dataset does not assume that ZIP code prefix alone is a
-unique primary key.
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Data Type Validation
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Geographic Validation
-
-Checks:
-
-- Latitude values
-- Longitude values
-- City consistency
-- State consistency
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Final Treatment
-
-[WRITE FINAL TREATMENT HERE]
-
-### Conclusion
-
-[WRITE FINAL CONCLUSION HERE]
+--- FINAL STATUS ---
+Missing Value Check: PASS
+Latitude Validation: PASS
+Longitude Validation: PASS
+ZIP Code Validation: PASS
+Geographic Data Quality: PASS
+Duplicate Check: REVIEW (expected/referential duplicates)
 
 
 ---
 
 ## 3.9 Category Translation
 
-### Dataset Purpose
+09. CATEGORY TRANSLATION — DATA QUALITY DOCUMENTATION
 
-The Category Translation dataset provides English translations
-for product category names.
+--- Dataset Overview ---
+Rows: 71
+Columns: 2
 
-### Grain
+--- Columns ---
+product_category_name
+product_category_name_english
 
-One row represents one product category translation.
+--- Important Validation ---
+Missing Values: 0
+Duplicate Rows: 0
+Portuguese Categories: 71
+English Categories: 71
+Empty Category Values: 0
 
-### Columns
+--- Data Quality Assessment ---
+- All category translation records are complete.
+- No duplicate mappings were found.
+- All Portuguese categories have corresponding English translations.
+- Column data types are appropriate for category mapping.
 
-- `product_category_name`
-- `product_category_name_english`
-
-### Missing Values
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Duplicate Records
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Key Validation
-
-**Key:** `product_category_name`
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Data Type Validation
-
-**Finding:**  
-[WRITE ACTUAL RESULT HERE]
-
-**Decision:**  
-[WRITE DECISION HERE]
-
-### Final Treatment
-
-[WRITE FINAL TREATMENT HERE]
-
-### Conclusion
-
-[WRITE FINAL CONCLUSION HERE]
+--- FINAL STATUS ---
+Category Translation Data Quality: PASS
 
 
 ---
 
 # 4. Overall Data Quality Summary
 
+
 ## Major Findings
 
 | Dataset | Issue | Severity | Business Impact | Treatment |
 |---|---|---|---|---|
-| Customers | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Orders | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Order Items | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Payments | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Reviews | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Products | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Sellers | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Geolocation | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
-| Category Translation | [Finding] | [Low/Medium/High] | [Impact] | [Treatment] |
+| Customers | No missing values or duplicate rows identified | Low | Reliable customer-level analysis | Keep |
+| Orders | 4,908 missing values | Medium | May affect order-level analysis and joins | Investigate and handle appropriately |
+| Order Items | No major missing or duplicate records identified | Low | Reliable order-item analysis | Keep |
+| Payments | No missing or duplicate records identified | Low | Reliable payment analysis | Keep |
+| Reviews | 145,903 missing values | High | May affect review, rating and customer feedback analysis | Handle missing values based on business context |
+| Products | 2,448 missing values | Medium | May affect product attributes and product-level analysis | Handle missing values appropriately |
+| Sellers | No missing or duplicate records identified | Low | Reliable seller-level analysis | Keep |
+| Geolocation | 261,831 duplicate rows | Medium | May affect geographic aggregation and location-based analysis | Validate and handle duplicates carefully |
+| Category Translation | No missing or duplicate records identified | Low | Reliable category mapping | Keep |
 
 ---
 
-# 5. Data Cleaning Strategy
+#  Data Cleaning Strategy
 
-Data cleaning decisions will be based on business context
-and the results of the quality checks.
+Data cleaning decisions will be based on the results of the data quality validation and the business context.
 
-Possible treatments include:
+The following treatment strategy will be applied:
 
-- Keep
-- Replace
-- Transform
-- Remove
-- Flag for investigation
+- **Keep:** Valid records with no quality issues will be retained.
+- **Replace:** Missing values will be replaced only when a meaningful business-based value is available.
+- **Transform:** Data types, formats and values will be transformed where required.
+- **Remove:** Records will be removed only when they are confirmed to be invalid or unusable.
+- **Flag for Investigation:** Suspicious values, extreme values and potential duplicate records will be reviewed before making changes.
 
-No records will be removed without documenting the reason.
+### Dataset-Specific Cleaning Approach
+
+- **Orders:** Investigate missing values and determine whether they affect important analytical fields.
+- **Reviews:** Analyze the reason for missing values and retain records where other review information remains useful.
+- **Products:** Handle missing product attributes carefully without affecting valid product records.
+- **Geolocation:** Validate duplicate geographic records before removing anything, as multiple records may represent repeated ZIP-code/location observations.
+- **Other Datasets:** Keep valid records where no significant quality issue was identified.
+
+**No records will be removed without documenting the reason and business justification.**
 
 ---
 
-# 6. Final Data Quality Assessment
+#  Final Data Quality Assessment
 
-### Overall Assessment
+## Overall Assessment
 
-[WRITE FINAL ASSESSMENT HERE]
+The overall data quality is **acceptable for analytical use after appropriate cleaning and validation**.
 
-### Major Limitations
+Most datasets have reliable primary keys and no duplicate rows. However, missing values are present in some important datasets, particularly **Orders, Reviews and Products**. The Geolocation dataset also contains a significant number of duplicate records that require careful validation before analysis.
 
-[WRITE REMAINING DATA LIMITATIONS HERE]
+The validation checks confirm that the core datasets are structurally consistent and suitable for further analysis after addressing the identified issues.
 
-### Recommended Actions
+## Major Limitations
 
-[WRITE RECOMMENDATIONS HERE]
+- Missing values are present in Orders, Reviews and Products.
+- Reviews contain a relatively high number of missing values, which may affect review and customer feedback analysis.
+- Products contain missing product attributes that may affect product-level analysis.
+- Geolocation contains **261,831 duplicate rows**, which may influence geographic aggregations if not handled correctly.
+- Some numerical fields may require additional outlier and business-rule validation before advanced analysis.
 
-### Readiness for Analysis
+## Recommended Actions
 
-[Ready / Ready after cleaning / Requires further investigation]
+1. Investigate and appropriately handle missing values.
+2. Validate Geolocation duplicate records before aggregation or joining.
+3. Check extreme and unusual numerical values.
+4. Maintain primary key uniqueness across all transactional and master datasets.
+5. Document every cleaning and transformation step.
+6. Perform final validation after cleaning to ensure data integrity.
+7. Use cleaned and validated datasets for downstream EDA, KPI analysis and visualization.
+
+## Readiness for Analysis
+
+**READY AFTER CLEANING**
+
+The datasets can be used for further **Exploratory Data Analysis (EDA), Business Analysis, KPI Development and Dashboard Creation** after the identified missing values and duplicate geographic records are appropriately handled.
