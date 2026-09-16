@@ -1,96 +1,79 @@
-# Data Model
+# 03 — Data Model Validation & Relationship Analysis
 
-## 1. Objective
+## 1. Overview
 
-Create a reliable analytical data model that allows
-sales, customer, product, seller, payment, and review
-analysis without double-counting metrics.
+This document describes the data model validation performed on the cleaned e-commerce datasets.
 
----
+The objective of this phase was to verify:
 
-## 2. Core Tables
+- Dataset structure and table grain
+- Primary keys
+- Composite keys
+- Foreign keys
+- Referential integrity
+- Table relationships
+- Category translation mapping
+- Unmatched category impact
 
-### Customers
-
-Customer-level information.
-
-### Orders
-
-Order-level information.
-
-### Order Items
-
-Individual products purchased within orders.
-
-### Products
-
-Product-level information.
-
-### Sellers
-
-Seller-level information.
-
-### Payments
-
-Payment transactions associated with orders.
-
-### Reviews
-
-Customer review information.
+The validation ensures that the cleaned datasets can be safely used for downstream SQL analysis, Python EDA, and Power BI data modeling.
 
 ---
 
-## 3. Key Relationships
+# 2. Datasets Used
 
-Customers
-→ Orders
+The following cleaned datasets from `Data/processed/` were used:
 
-Orders
-→ Order Items
-
-Products
-→ Order Items
-
-Sellers
-→ Order Items
-
-Orders
-→ Payments
-
-Orders
-→ Reviews
-
-Products
-→ Category Translation
+| Dataset | Rows | Columns |
+|---|---:|---:|
+| Customers | 99,441 | 5 |
+| Orders | 99,441 | 8 |
+| Order Items | 112,650 | 7 |
+| Payments | 103,886 | 5 |
+| Reviews | 99,224 | 7 |
+| Products | 32,951 | 9 |
+| Sellers | 3,095 | 4 |
+| Geolocation | 738,332 | 5 |
+| Category Translation | 71 | 2 |
 
 ---
 
-## 4. Analytical Model
+# 3. Data Grain
 
-The final Power BI model will use an appropriate
-star-schema-oriented design where possible.
+Understanding the grain of each table is important before creating relationships.
 
-Fact tables:
+| Dataset | Grain |
+|---|---|
+| Customers | One row represents a customer record |
+| Orders | One row represents an order |
+| Order Items | One row represents one item within an order |
+| Payments | One row represents one payment sequence within an order |
+| Reviews | One row represents a review associated with an order |
+| Products | One row represents a product |
+| Sellers | One row represents a seller |
+| Geolocation | One row represents a geographical location record |
+| Category Translation | One row represents a product-category translation mapping |
 
-- Fact Orders
-- Fact Order Items
-- Fact Payments
-- Fact Reviews
-
-Dimension tables:
-
-- Dim Customer
-- Dim Product
-- Dim Seller
-- Dim Date
-- Dim Geography
+The different grains explain why some columns cannot be used as standalone primary keys.
 
 ---
 
-## 5. Modeling Principles
+# 4. Primary Key Validation
 
-- Avoid many-to-many relationships where unnecessary
-- Maintain a clear table grain
-- Avoid duplicate measures caused by joins
-- Use dimension tables for filtering and slicing
-- Keep transactional facts at their natural grain
+## 4.1 Definition
+
+A primary key is a column, or combination of columns, that uniquely identifies a record within a table.
+
+A valid primary key should generally:
+
+1. Uniquely identify each row
+2. Contain no NULL values
+3. Have no duplicate values
+
+---
+
+## 4.2 Customers
+
+### Primary Key
+
+```text
+customer_id
