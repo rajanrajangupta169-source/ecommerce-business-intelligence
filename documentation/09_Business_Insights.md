@@ -1,41 +1,28 @@
-# Business Insights
+# 📈 Key Business Insights
 
-## Insight Template
+1. **Revenue Performance:** The dashboard shows approximately 16.01M in total revenue, providing an overview of overall business performance.
 
-### Insight 1
+2. **Regional Performance:** São Paulo (SP) is the highest revenue-generating state, contributing approximately 6.0M.
 
-**Finding:**
+3. **Top Product Categories:** `beleza_saude` and `relogios_presentes` are among the highest revenue-generating categories.
 
-To be completed after analysis.
+4. **Payment Preferences:** Credit card is the most frequently represented payment category, indicating a strong customer preference.
 
-**Evidence:**
+5. **Order Fulfillment:** Approximately 97.02% of orders are delivered, showing a high delivered-order share.
 
-Relevant SQL/Python/Power BI analysis.
+6. **Customer Satisfaction:** Five-star reviews represent the largest review category, with approximately 57K reviews.
 
-**Business Impact:**
+7. **Seller Performance:** The top 10 sellers contribute significantly to overall business revenue.
 
-To be determined.
+## 💡 Business Recommendations
 
-**Possible Cause:**
+- Focus on high-revenue product categories to improve sales.
+- Explore growth opportunities in states beyond São Paulo.
+- Maintain a smooth credit card payment experience.
+- Investigate cancelled orders and low customer ratings.
+- Strengthen relationships with high-performing sellers.
+- Monitor monthly revenue trends to identify growth opportunities.
 
-To be investigated.
+## Conclusion
 
----
-
-### Insight 2
-
-**Finding:**
-
-To be completed after analysis.
-
-**Evidence:**
-
-Relevant analysis.
-
-**Business Impact:**
-
-To be determined.
-
-**Possible Cause:**
-
-To be investigated.
+The dashboard helps identify revenue trends, customer preferences, top-performing categories, regional performance, and operational patterns. These insights support better business planning and data-driven decision-making.
