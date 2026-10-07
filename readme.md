@@ -279,7 +279,7 @@ How could the recommendation improve business performance?
 
 ## 📁 Project Structure
 
-
+```
 ecommerce-business-intelligence/
 │
 ├── Data/
@@ -346,7 +346,7 @@ ecommerce-business-intelligence/
 │   └── 12_final_kpi_validation.sql
 │
 └── README.md
----
+```
 
 ## 🚀 Project Highlights
 
