@@ -279,33 +279,73 @@ How could the recommendation improve business performance?
 
 ## 📁 Project Structure
 
+
 ecommerce-business-intelligence/
-
-├── Data/  
-│   ├── olist_customers_dataset.csv  
-│   ├── olist_geolocation_dataset.csv  
-│   ├── olist_order_items_dataset.csv  
-│   ├── olist_order_payments_dataset.csv  
-│   ├── olist_order_reviews_dataset.csv  
-│   ├── olist_orders_dataset.csv  
-│   ├── olist_products_dataset.csv  
-│   ├── olist_sellers_dataset.csv  
-│   └── product_category_name_translation.csv  
-│  
-├── Powerbi/  
-│   └── Power BI Dashboard Files  
-│  
-├── Sql/  
-│   └── SQL Analysis & Queries  
-│  
-├── python/  
-│   └── Python EDA & Analysis  
-│  
-├── documentation/  
-│   └── Project Documentation  
-│  
+│
+├── Data/
+│   ├── cleaned/
+│   │   ├── category_translation_clean.csv
+│   │   ├── customers_clean.csv
+│   │   ├── geolocation_clean.csv
+│   │   ├── order_items_clean.csv
+│   │   ├── orders_clean.csv
+│   │   ├── payments_clean.csv
+│   │   ├── products_clean.csv
+│   │   ├── reviews_clean.csv
+│   │   └── sellers_clean.csv
+│   │
+│   └── raw/
+│       ├── olist_customers_dataset.csv
+│       ├── olist_geolocation_dataset.csv
+│       ├── olist_order_items_dataset.csv
+│       ├── olist_order_payments_dataset.csv
+│       ├── olist_order_reviews_dataset.csv
+│       ├── olist_orders_dataset.csv
+│       ├── olist_products_dataset.csv
+│       ├── olist_sellers_dataset.csv
+│       └── product_category_name_translation.csv
+│
+├── documentation/
+│   ├── 01_Business_Requirements.md
+│   ├── 02_Data_Inventory.md
+│   ├── 03_Data_Dictionary.xlsx
+│   ├── 04_Data_Quality_Report.md
+│   ├── 04.2_Data_Cleaning.md
+│   ├── 05_Data_Model.md
+│   ├── 06_SQL_Analysis.md
+│   ├── 07_Python_EDA.md
+│   ├── 08_PowerBI_Dashboard.md
+│   ├── 09_Business_Insights.md
+│   └── 10_Recommendations.md
+│
+├── Powerbi/
+│   └── dashboard/
+│       ├── page_1.png
+│       ├── page_2.png
+│       └── E-Commerce_Business_Intelligence_Dashboard.pbix
+│
+├── presentation/
+│
+├── python/
+│   ├── 01_Data_Quality_Analysis.ipynb
+│   ├── 02_EDA.ipynb
+│   └── Data_model.ipynb
+│
+├── Sql/
+│   ├── 01_database_setup.sql
+│   ├── 02_table_creation.sql
+│   ├── 03_data_import.sql
+│   ├── 04_data_exploration.sql
+│   ├── 05_data_quality_validation.sql
+│   ├── 06_sales_analysis.sql
+│   ├── 07_customer_analysis.sql
+│   ├── 08_product_analysis.sql
+│   ├── 09_regional_analysis.sql
+│   ├── 10_payment_order_analysis.sql
+│   ├── 11_advanced_sql.sql
+│   └── 12_final_kpi_validation.sql
+│
 └── README.md
-
 ---
 
 ## 🚀 Project Highlights
